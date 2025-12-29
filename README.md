@@ -8,7 +8,7 @@
 
 一个简洁优雅的 Chrome 新标签页扩展，提供自定义背景、每日一言、智能搜索等功能
 
-[功能特性](#-功能特性) • [快速开始](#-快速开始) • [项目结构](#-项目结构) • [开发指南](#-开发指南) • [贡献指南](#-贡献指南)
+[功能特性](#-功能特性) • [快速开始](#-快速开始) • [开发指南](#-开发指南) • [贡献指南](#-贡献指南)
 
 </div>
 
@@ -23,7 +23,6 @@
   - [安装步骤](#安装步骤)
   - [使用说明](#使用说明)
 - [技术栈](#️-技术栈)
-- [项目结构](#-项目结构)
 - [开发指南](#-开发指南)
   - [本地开发](#本地开发)
   - [代码规范](#代码规范)
@@ -74,12 +73,27 @@
 
 ### 安装步骤
 
-#### 方式一：开发者模式安装（推荐）
+#### 方式一：使用 Release 安装（推荐）
+
+1. **下载安装包**
+   - 访问 [Releases 页面](https://github.com/ltba/Snow/releases)
+   - 下载最新版本的 `.crx` 文件
+
+2. **安装扩展**
+   - 打开 Chrome 浏览器，访问 `chrome://extensions/`
+   - 启用右上角的"开发者模式"
+   - 将下载的 `.crx` 文件拖入扩展管理页面
+   - 确认安装
+
+3. **开始使用**
+   - 打开新标签页即可看到扩展界面
+
+#### 方式二：开发者模式安装
 
 1. **下载项目**
    ```bash
-   git clone https://github.com/your-username/snow.git
-   cd snow
+   git clone https://github.com/ltba/Snow.git
+   cd Snow
    ```
 
 2. **打开扩展管理页面**
@@ -93,14 +107,8 @@
    - 点击"加载已解压的扩展程序"
    - 选择项目根目录（包含 manifest.json 的目录）
 
-5. **开始使用**
+5. **开始��用**
    - 打开新标签页即可看到扩展界面
-
-#### 方式二：打包安装
-
-1. 在扩展管理页面点击"打包扩展程序"
-2. 选择项目目录，生成 `.crx` 文件
-3. 将 `.crx` 文件拖入扩展管理页面完成安装
 
 ### 使用说明
 
@@ -141,70 +149,14 @@
 
 ---
 
-## 📁 项目结构
-
-```
-Snow/
-├── manifest.json              # 扩展配置文件（Manifest V3）
-├── newtab.html               # 新标签页主页面
-├── popup.html                # 扩展弹窗页面
-├── popup.js                  # 弹窗逻辑
-├── popup.css                 # 弹窗样式
-├── README.md                 # 项目说明文档
-│
-├── css/                      # 样式文件（模块化架构）
-│   ├── style.css             # 主样式入口
-│   ├── variables.css         # CSS 变量定义
-│   ├── base.css              # 全局基础样式
-│   ├── layout.css            # 布局样式
-│   ├── animations.css        # 动画效果
-│   ├── responsive.css        # 响应式样式
-│   └── components/           # 组件样式
-│       ├── buttons.css       # 按钮组件
-│       ├── cursor.css        # 鼠标光标效果
-│       ├── custom-select.css # 自定义选择器
-│       ├── forms.css         # 表单组件
-│       ├── modal.css         # 弹窗组件
-│       ├── quick-access.css  # 快速访问
-│       ├── quote.css         # 一言组件
-│       ├── search.css        # 搜索组件
-│       └── time.css          # 时间组件
-│
-├── js/                       # JavaScript 文件（模块化架构）
-│   ├── main.js               # 主入口文件
-│   ├── config.js             # 配置文件
-│   ├── storage.js            # 存储管理模块
-│   └── modules/              # 功能模块
-│       ├── background.js     # 背景管理
-│       ├── cursor.js         # 鼠标光标效果
-│       ├── custom-select.js  # 自定义选择器
-│       ├── quick-access.js   # 快速访问
-│       ├── quote.js          # 一言功能
-│       ├── search.js         # 搜索功能
-│       ├── security.js       # 安全功能
-│       ├── settings.js       # 设置管理
-│       └── time.js           # 时间显示
-│
-├── icons/                    # 图标资源
-│   ├── icon.svg              # SVG 图标
-│   ├── icon16.png            # 16x16 图标
-│   ├── icon48.png            # 48x48 图标
-│   └── icon128.png           # 128x128 图标
-│
-└── images/                   # 图片资源
-    └── img1.png              # 默认背景图片
-```
-
----
-
 ## 📖 开发指南
 
 ### 本地开发
 
 1. **克隆项目**
    ```bash
-   git clone https://github.com/your-username/snow.git
-   cd snow
+   git clone https://github.com/ltba/Snow.git
+   cd Snow
    ```
 
 2. **加载扩展**
