@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "简洁新标签页",
-  "version": "1.2.0",
+  "version": "1.1.0",
   "description": "一个简洁优雅的新标签页，支持自定义背景、每日一言、搜索功能、URL图片、禁用复制、模块化架构",
   "chrome_url_overrides": {
     "newtab": "newtab.html"

@@ -27,8 +27,8 @@ const HITOKOTO_API = 'https://v1.hitokoto.cn/';
 
 // 默认配置
 const DEFAULT_CONFIG = {
-    backgroundType: 'gradient',
-    backgroundImage: '',
+    backgroundType: 'url',
+    backgroundImage: 'images/img1.png',
     searchEngine: 'baidu',
     quoteEnabled: true,
     quoteTypes: ['a', 'b', 'c', 'd', 'i'],

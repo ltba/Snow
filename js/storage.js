@@ -125,9 +125,20 @@ const StorageManager = {
         const existing = await this.getAll();
         const updates = {};
 
+        // DEFAULT_CONFIG key 到 STORAGE_KEYS 的映射
+        const configKeyMap = {
+            backgroundType: 'BACKGROUND_TYPE',
+            backgroundImage: 'BACKGROUND_IMAGE',
+            searchEngine: 'SEARCH_ENGINE',
+            quoteEnabled: 'QUOTE_ENABLED',
+            quoteTypes: 'QUOTE_TYPES',
+            copyProtection: 'COPY_PROTECTION',
+            quickAccessPosition: 'QUICK_ACCESS_POSITION'
+        };
+
         // 只设置不存在的配置项
         for (const [key, value] of Object.entries(DEFAULT_CONFIG)) {
-            const storageKey = STORAGE_KEYS[key.toUpperCase().replace(/([A-Z])/g, '_$1')];
+            const storageKey = STORAGE_KEYS[configKeyMap[key]];
             if (storageKey && existing[storageKey] === undefined) {
                 updates[storageKey] = value;
             }
