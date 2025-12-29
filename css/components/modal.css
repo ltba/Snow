@@ -271,3 +271,47 @@
         transform: translateY(0);
     }
 }
+
+/* 拖拽手柄样式 */
+.qa-drag-handle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    cursor: move;
+    cursor: grab;
+    margin-right: var(--spacing-sm);
+    flex-shrink: 0;
+    opacity: 0.5;
+    transition: opacity var(--transition-fast) ease;
+}
+
+.qa-drag-handle:active {
+    cursor: grabbing;
+}
+
+.qa-drag-handle:hover {
+    opacity: 1;
+}
+
+.qa-drag-handle svg {
+    width: 16px;
+    height: 16px;
+    color: var(--text-secondary);
+}
+
+/* 拖拽中的样式 */
+.qa-list-item.dragging {
+    opacity: 0.5;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* 拖拽占位符样式 */
+.qa-list-item.drag-over-top {
+    border-top: 2px solid var(--accent-blue);
+}
+
+.qa-list-item.drag-over-bottom {
+    border-bottom: 2px solid var(--accent-blue);
+}

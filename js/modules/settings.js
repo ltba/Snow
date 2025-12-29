@@ -31,6 +31,9 @@ const SettingsModule = {
         importConfigInput: null
     },
 
+    // 拖拽状态
+    draggedElement: null,
+
     /**
      * 初始化设置模块
      */
@@ -398,9 +401,22 @@ const SettingsModule = {
             const itemEl = document.createElement('div');
             itemEl.className = 'qa-list-item';
             itemEl.setAttribute('data-index', index);
+
+            // 只有多个项目时才显示拖拽手柄
+            const dragHandleHtml = items.length > 1 ? `
+                <div class="qa-drag-handle" draggable="true" title="拖拽排序">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="4" y1="8" x2="20" y2="8"></line>
+                        <line x1="4" y1="12" x2="20" y2="12"></line>
+                        <line x1="4" y1="16" x2="20" y2="16"></line>
+                    </svg>
+                </div>
+            ` : '';
+
             itemEl.innerHTML = `
+                ${dragHandleHtml}
                 <div class="qa-list-item-info">
-                    <img src="${item.icon || ''}" alt="${item.title}" onerror="this.style.display='none'">
+                    <img src="${item.icon || ''}" alt="${item.title}" class="qa-item-icon">
                     <div>
                         <div class="qa-list-item-title">${item.title}</div>
                         <div class="qa-list-item-url">${item.url}</div>
@@ -411,6 +427,14 @@ const SettingsModule = {
                     <button class="btn btn-secondary btn-small qa-remove-btn" data-index="${index}">删除</button>
                 </div>
             `;
+
+            // 绑定图标错误处理
+            const iconImg = itemEl.querySelector('.qa-item-icon');
+            if (iconImg) {
+                iconImg.addEventListener('error', function() {
+                    this.style.display = 'none';
+                });
+            }
 
             // 绑定编辑按钮
             const editBtn = itemEl.querySelector('.qa-edit-btn');
@@ -424,7 +448,101 @@ const SettingsModule = {
                 this.handleRemoveQuickAccess(index);
             });
 
+            // 绑定拖拽事件
+            if (items.length > 1) {
+                this.bindDragEvents(itemEl);
+            }
+
             this.elements.qaList.appendChild(itemEl);
+        });
+    },
+
+    /**
+     * 绑定拖拽事件
+     * @param {HTMLElement} itemEl - 列表项元素
+     */
+    bindDragEvents(itemEl) {
+        const dragHandle = itemEl.querySelector('.qa-drag-handle');
+        if (!dragHandle) return;
+
+        // 拖拽开始
+        dragHandle.addEventListener('dragstart', (e) => {
+            this.draggedElement = itemEl;
+            itemEl.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', itemEl.innerHTML);
+        });
+
+        // 拖拽结束
+        dragHandle.addEventListener('dragend', () => {
+            itemEl.classList.remove('dragging');
+            // 移除所有占位符
+            document.querySelectorAll('.drag-over-top, .drag-over-bottom').forEach(el => {
+                el.classList.remove('drag-over-top', 'drag-over-bottom');
+            });
+            this.draggedElement = null;
+        });
+
+        // 拖拽经过
+        itemEl.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+
+            if (this.draggedElement && this.draggedElement !== itemEl) {
+                // 判断插入位置
+                const rect = itemEl.getBoundingClientRect();
+                const midpoint = rect.top + rect.height / 2;
+
+                if (e.clientY < midpoint) {
+                    itemEl.classList.add('drag-over-top');
+                    itemEl.classList.remove('drag-over-bottom');
+                } else {
+                    itemEl.classList.add('drag-over-bottom');
+                    itemEl.classList.remove('drag-over-top');
+                }
+            }
+        });
+
+        // 离开拖拽区域
+        itemEl.addEventListener('dragleave', () => {
+            itemEl.classList.remove('drag-over-top', 'drag-over-bottom');
+        });
+
+        // 放置
+        itemEl.addEventListener('drop', async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            if (this.draggedElement && this.draggedElement !== itemEl) {
+                const fromIndex = parseInt(this.draggedElement.getAttribute('data-index'));
+                const toIndex = parseInt(itemEl.getAttribute('data-index'));
+
+                // 计算最终插入位置
+                const rect = itemEl.getBoundingClientRect();
+                const midpoint = rect.top + rect.height / 2;
+                let finalIndex;
+
+                if (e.clientY < midpoint) {
+                    // 拖拽到上半部分，插入到目标元素之前
+                    finalIndex = toIndex;
+                } else {
+                    // 拖拽到下半部分，插入到目标元素之后
+                    finalIndex = toIndex + 1;
+                }
+
+                // 如果源索引在目标索引之前，移除源元素后，后面的索引会减1
+                if (fromIndex < finalIndex) {
+                    finalIndex -= 1;
+                }
+
+                // 只有当位置真正改变时才更新
+                if (fromIndex !== finalIndex) {
+                    await QuickAccessModule.reorderItems(fromIndex, finalIndex);
+                    await this.loadQuickAccessList();
+                }
+            }
+
+            itemEl.classList.remove('drag-over-top', 'drag-over-bottom');
         });
     },
 

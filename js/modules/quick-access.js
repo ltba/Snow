@@ -68,7 +68,7 @@ const QuickAccessModule = {
         const itemEl = document.createElement('a');
         itemEl.className = 'quick-access-item';
         itemEl.href = item.url;
-        itemEl.target = '_blank';
+        // itemEl.target = '_blank';
         itemEl.rel = 'noopener noreferrer';
 
         // 图标容器
@@ -231,5 +231,26 @@ const QuickAccessModule = {
      */
     getItems() {
         return [...this.items];
+    },
+
+    /**
+     * 重新排序项目
+     * @param {number} fromIndex - 源索引
+     * @param {number} toIndex - 目标索引
+     */
+    async reorderItems(fromIndex, toIndex) {
+        if (fromIndex < 0 || fromIndex >= this.items.length ||
+            toIndex < 0 || toIndex >= this.items.length ||
+            fromIndex === toIndex) {
+            return;
+        }
+
+        // 移动数组元素
+        const [movedItem] = this.items.splice(fromIndex, 1);
+        this.items.splice(toIndex, 0, movedItem);
+
+        // 保存并重新渲染
+        await this.saveItems();
+        this.render();
     }
 };
