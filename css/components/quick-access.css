@@ -21,6 +21,20 @@
     animation: slide-up 0.4s ease-out;
 }
 
+/* 顶部位置样式 */
+.quick-access.position-top {
+    top: 20px;
+    bottom: auto;
+    animation: slide-down 0.4s ease-out;
+}
+
+/* 底部位置样式（默认） */
+.quick-access.position-bottom {
+    bottom: 20px;
+    top: auto;
+    animation: slide-up 0.4s ease-out;
+}
+
 .quick-access.visible {
     display: flex;
 }
@@ -166,11 +180,23 @@
     75% { transform: rotate(2deg); }
 }
 
-/* 滑入动画 */
+/* 滑入动画 - 从底部 */
 @keyframes slide-up {
     from {
         opacity: 0;
         transform: translateX(-50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* 滑入动画 - 从顶部 */
+@keyframes slide-down {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
     }
     to {
         opacity: 1;

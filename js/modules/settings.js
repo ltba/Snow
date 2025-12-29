@@ -26,6 +26,7 @@ const SettingsModule = {
         qaUrlInput: null,
         addQaBtn: null,
         qaList: null,
+        qaPositionRadios: null,
         exportConfigBtn: null,
         importConfigBtn: null,
         importConfigInput: null
@@ -61,6 +62,7 @@ const SettingsModule = {
             this.elements.qaUrlInput = document.getElementById('qa-url-input');
             this.elements.addQaBtn = document.getElementById('add-qa-btn');
             this.elements.qaList = document.getElementById('qa-list');
+            this.elements.qaPositionRadios = document.querySelectorAll('input[name="qa-position"]');
             this.elements.exportConfigBtn = document.getElementById('export-config-btn');
             this.elements.importConfigBtn = document.getElementById('import-config-btn');
             this.elements.importConfigInput = document.getElementById('import-config-input');
@@ -239,6 +241,17 @@ const SettingsModule = {
                 DEFAULT_CONFIG.copyProtection
             );
             this.elements.copyProtectionCheckbox.checked = copyProtection;
+
+            // 加载快捷访问位置设置
+            const qaPosition = await StorageManager.getWithDefault(
+                STORAGE_KEYS.QUICK_ACCESS_POSITION,
+                DEFAULT_CONFIG.quickAccessPosition
+            );
+            this.elements.qaPositionRadios.forEach(radio => {
+                if (radio.value === qaPosition) {
+                    radio.checked = true;
+                }
+            });
         } catch (error) {
             console.error('加载设置失败:', error);
         }
@@ -361,13 +374,17 @@ const SettingsModule = {
             // 获取复制保护设置
             const copyProtection = this.elements.copyProtectionCheckbox.checked;
 
+            // 获取快捷访问位置设置
+            const qaPosition = Array.from(this.elements.qaPositionRadios).find(r => r.checked)?.value || 'bottom';
+
             // 保存所有设置
             await StorageManager.setMultiple({
                 [STORAGE_KEYS.BACKGROUND_TYPE]: bgType,
                 [STORAGE_KEYS.SEARCH_ENGINE]: searchEngine,
                 [STORAGE_KEYS.QUOTE_ENABLED]: quoteEnabled,
                 [STORAGE_KEYS.QUOTE_TYPES]: quoteTypes,
-                [STORAGE_KEYS.COPY_PROTECTION]: copyProtection
+                [STORAGE_KEYS.COPY_PROTECTION]: copyProtection,
+                [STORAGE_KEYS.QUICK_ACCESS_POSITION]: qaPosition
             });
 
             alert('设置已保存');

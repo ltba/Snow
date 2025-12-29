@@ -20,6 +20,9 @@ const QuickAccessModule = {
         // 加载快捷访问列表
         await this.loadItems();
 
+        // 加载位置设置并应用
+        await this.loadPosition();
+
         // 渲染
         this.render();
 
@@ -34,6 +37,35 @@ const QuickAccessModule = {
             STORAGE_KEYS.QUICK_ACCESS,
             []
         );
+    },
+
+    /**
+     * 加载并应用位置设置
+     */
+    async loadPosition() {
+        const position = await StorageManager.getWithDefault(
+            STORAGE_KEYS.QUICK_ACCESS_POSITION,
+            DEFAULT_CONFIG.quickAccessPosition
+        );
+        this.applyPosition(position);
+    },
+
+    /**
+     * 应用位置样式
+     * @param {string} position - 位置 ('top' 或 'bottom')
+     */
+    applyPosition(position) {
+        if (!this.container) return;
+
+        // 移除现有位置类
+        this.container.classList.remove('position-top', 'position-bottom');
+
+        // 添加新位置类
+        if (position === 'top') {
+            this.container.classList.add('position-top');
+        } else {
+            this.container.classList.add('position-bottom');
+        }
     },
 
     /**

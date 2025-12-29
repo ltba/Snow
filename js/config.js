@@ -11,7 +11,8 @@ const STORAGE_KEYS = {
     QUOTE_ENABLED: 'quoteEnabled',
     QUOTE_TYPES: 'quoteTypes',
     COPY_PROTECTION: 'copyProtection',
-    QUICK_ACCESS: 'quickAccess'
+    QUICK_ACCESS: 'quickAccess',
+    QUICK_ACCESS_POSITION: 'quickAccessPosition'
 };
 
 // 搜索引擎配置
@@ -31,7 +32,8 @@ const DEFAULT_CONFIG = {
     searchEngine: 'baidu',
     quoteEnabled: true,
     quoteTypes: ['a', 'b', 'c', 'd', 'i'],
-    copyProtection: true
+    copyProtection: true,
+    quickAccessPosition: 'bottom'
 };
 
 // 缓存过期时间（1小时）
