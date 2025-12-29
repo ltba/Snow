@@ -1,0 +1,180 @@
+/*
+ * 自定义下拉选择组件样式
+ */
+
+.custom-select {
+    position: relative;
+    width: 100%;
+    user-select: none;
+}
+
+/* 选中的值显示区域 */
+.custom-select-trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    background-color: var(--bg-secondary);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid transparent;
+    color: var(--text-primary);
+    font-size: var(--font-size-base);
+    cursor: pointer;
+    transition: all var(--transition-base) ease-in-out;
+}
+
+.custom-select-trigger:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.custom-select.active .custom-select-trigger {
+    border-color: rgba(57, 159, 255, 0.5);
+    background-color: var(--bg-card);
+}
+
+/* 箭头图标 */
+.custom-select-arrow {
+    width: 16px;
+    height: 16px;
+    margin-left: var(--spacing-sm);
+    transition: transform var(--transition-base) ease;
+    opacity: 0.8;
+}
+
+.custom-select.active .custom-select-arrow {
+    transform: rotate(180deg);
+    opacity: 1;
+}
+
+/* 下拉选项容器 */
+.custom-select-options {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    max-height: 0;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 100;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all var(--transition-base) ease-in-out;
+    box-shadow: var(--shadow-lg);
+}
+
+.custom-select.active .custom-select-options {
+    max-height: 300px;
+    overflow-y: auto;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 滚动条样式 */
+.custom-select-options::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-select-options::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.custom-select-options::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* 选项 */
+.custom-select-option {
+    padding: var(--spacing-md) var(--spacing-lg);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast) ease;
+    border-left: 3px solid transparent;
+}
+
+.custom-select-option:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    border-left-color: var(--accent-blue);
+}
+
+.custom-select-option.selected {
+    background-color: rgba(57, 159, 255, 0.2);
+    color: var(--text-primary);
+    border-left-color: var(--accent-blue);
+    font-weight: 500;
+}
+
+.custom-select-option:first-child {
+    border-top-left-radius: var(--radius-md);
+    border-top-right-radius: var(--radius-md);
+}
+
+.custom-select-option:last-child {
+    border-bottom-left-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
+}
+
+/* 搜索框中的自定义 select（圆形样式） */
+.search-engine-select {
+    position: relative;
+    display: inline-block;
+    width: auto;
+}
+
+.search-engine-select .custom-select-trigger {
+    padding: var(--spacing-sm) var(--spacing-lg) var(--spacing-sm) var(--spacing-md);
+    border-radius: 50px;
+    font-size: var(--font-size-sm);
+    width: auto;
+    display: inline-flex;
+    white-space: nowrap;
+}
+
+.search-engine-select .custom-select-value {
+    display: inline-block;
+}
+
+.search-engine-select .custom-select-arrow {
+    width: 12px;
+    height: 12px;
+    margin-left: var(--spacing-xs);
+    flex-shrink: 0;
+}
+
+.search-engine-select .custom-select-options {
+    min-width: 100px;
+    right: 0;
+    left: auto;
+}
+
+/* 禁用状态 */
+.custom-select.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.custom-select.disabled .custom-select-trigger {
+    cursor: not-allowed;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* 焦点状态 */
+.custom-select-trigger:focus {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .custom-select-options {
+        max-height: 200px;
+    }
+}

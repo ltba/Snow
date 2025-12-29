@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加到快捷访问</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="popup-container">
+        <div class="popup-header">
+            <h2>快捷访问</h2>
+        </div>
+
+        <div class="popup-body">
+            <div class="site-info">
+                <img id="site-icon" class="site-icon" src="" alt="网站图标">
+                <div class="site-details">
+                    <div id="site-title" class="site-title">加载中...</div>
+                    <div id="site-url" class="site-url">加载中...</div>
+                </div>
+            </div>
+
+            <div id="status-message" class="status-message" style="display: none;"></div>
+        </div>
+
+        <div class="popup-footer">
+            <button id="add-btn" class="btn btn-primary">添加到快捷访问</button>
+            <button id="remove-btn" class="btn btn-secondary" style="display: none;">从快捷访问移除</button>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html>

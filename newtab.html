@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新标签页</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 背景图片容器 -->
+    <div id="background-container"></div>
+
+    <!-- 主内容区域 -->
+    <div class="container">
+        <!-- 时间显示 -->
+        <div class="time-section">
+            <div id="time" class="time"></div>
+            <div id="date" class="date"></div>
+        </div>
+
+        <!-- 搜索框 -->
+        <div class="search-section">
+            <form id="search-form" class="search-form" action="#">
+                <input
+                    type="text"
+                    id="search-input"
+                    class="search-input"
+                    placeholder="搜索或输入网址..."
+                    autocomplete="off"
+                    aria-label="搜索输入框"
+                >
+                <div class="custom-select search-engine-select" id="search-engine" data-value="baidu" role="combobox" aria-label="选择搜索引擎" aria-expanded="false">
+                    <div class="custom-select-trigger" tabindex="0">
+                        <span class="custom-select-value">百度</span>
+                        <svg class="custom-select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="custom-select-options">
+                        <div class="custom-select-option" data-value="google">Google</div>
+                        <div class="custom-select-option selected" data-value="baidu">百度</div>
+                        <div class="custom-select-option" data-value="bing">Bing</div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- 每日一言 -->
+        <div class="quote-section">
+            <div id="quote-text" class="quote-text">加载中...</div>
+            <div id="quote-source" class="quote-source"></div>
+        </div>
+
+        <!-- 设置按钮 -->
+        <nav class="action-buttons" aria-label="快捷操作">
+            <button id="settings-btn" class="settings-btn" title="设置" aria-label="打开设置">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M12 1v6m0 6v6m5.2-13.2l-4.2 4.2m-2 2l-4.2 4.2M23 12h-6m-6 0H1m18.2 5.2l-4.2-4.2m-2-2l-4.2-4.2"></path>
+                </svg>
+            </button>
+            <button id="refresh-quote-btn" class="settings-btn" title="刷新一言" aria-label="刷新一言">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <polyline points="23 4 23 10 17 10"></polyline>
+                    <polyline points="1 20 1 14 7 14"></polyline>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                </svg>
+            </button>
+        </nav>
+    </div>
+
+    <!-- 快捷访问 -->
+    <div id="quick-access" class="quick-access" role="navigation" aria-label="快捷访问">
+        <!-- 动态生成 -->
+    </div>
+
+    <!-- 设置弹窗 -->
+    <div id="settings-modal" class="modal-overlay" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="settings-modal-title">
+        <div class="settings-modal-content">
+            <!-- 头部 -->
+            <div class="settings-modal-header">
+                <h2 id="settings-modal-title">设置</h2>
+                <button id="close-settings-modal-btn" class="modal-close-btn" aria-label="关闭设置">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- 设置内容 -->
+            <div class="settings-modal-body">
+                <!-- 背景设置 -->
+                <section class="settings-section">
+                    <h3>背景设置</h3>
+
+                    <div class="setting-item">
+                        <label>背景类型</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="bg-type" value="gradient" checked>
+                                <span>默认渐变</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="bg-type" value="local">
+                                <span>本地图片</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="bg-type" value="url">
+                                <span>URL 图片</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="setting-item" id="local-upload-section" style="display: none;">
+                        <label>上传本地图片</label>
+                        <button id="upload-local-btn" class="btn btn-secondary">选择文件</button>
+                        <input type="file" id="local-file-input" accept="image/*" style="display: none;">
+                        <p class="hint">支持 JPG、PNG、GIF 等格式，建议 1920x1080 分辨率</p>
+                    </div>
+
+                    <div class="setting-item" id="url-input-section" style="display: none;">
+                        <label>图片 URL</label>
+                        <input type="text" id="bg-url-input" class="input-text" placeholder="https://example.com/image.jpg">
+                        <button id="apply-url-btn" class="btn btn-primary">应用</button>
+                        <p class="hint">图片必须允许跨域访问（CORS）</p>
+                    </div>
+
+                    <div class="setting-item">
+                        <button id="reset-bg-btn" class="btn btn-secondary">恢复默认背景</button>
+                    </div>
+                </section>
+
+                <!-- 搜索设置 -->
+                <section class="settings-section">
+                    <h3>搜索设置</h3>
+
+                    <div class="setting-item">
+                        <label>默认搜索引擎</label>
+                        <div class="custom-select" id="search-engine-select" data-value="baidu" role="combobox" aria-label="默认搜索引擎">
+                            <div class="custom-select-trigger" tabindex="0">
+                                <span class="custom-select-value">百度</span>
+                                <svg class="custom-select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </div>
+                            <div class="custom-select-options">
+                                <div class="custom-select-option selected" data-value="baidu">百度</div>
+                                <div class="custom-select-option" data-value="google">Google</div>
+                                <div class="custom-select-option" data-value="bing">Bing</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 快捷访问设置 -->
+                <section class="settings-section">
+                    <h3>快捷访问</h3>
+
+                    <div class="setting-item">
+                        <label>添加网站</label>
+                        <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                            <input type="text" id="qa-title-input" class="input-text" placeholder="网站名称（如：GitHub）" style="flex: 1; margin-bottom: 0;">
+                            <input type="text" id="qa-url-input" class="input-text" placeholder="网站地址（如：https://github.com）" style="flex: 2; margin-bottom: 0;">
+                            <button id="add-qa-btn" class="btn btn-primary">添加</button>
+                        </div>
+                        <p class="hint">提示：访问目标网站时，也可以点击扩展图标快速添加</p>
+                    </div>
+
+                    <div class="setting-item">
+                        <label>已添加的网站</label>
+                        <div id="qa-list" class="qa-list">
+                            <!-- 动态生成 -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 每日一言设置 -->
+                <section class="settings-section">
+                    <h3>每日一言</h3>
+
+                    <div class="setting-item">
+                        <label class="switch-label">
+                            <span>显示每日一言</span>
+                            <label class="switch">
+                                <input type="checkbox" id="quote-enabled" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </label>
+                    </div>
+
+                    <div class="setting-item">
+                        <label>一言类型</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="quote-type" value="a" checked>
+                                <span>动画</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="quote-type" value="b" checked>
+                                <span>漫画</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="quote-type" value="c" checked>
+                                <span>游戏</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="quote-type" value="d" checked>
+                                <span>文学</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="quote-type" value="i" checked>
+                                <span>诗词</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <button id="clear-quote-cache-btn" class="btn btn-secondary">清除一言缓存</button>
+                    </div>
+                </section>
+
+                <!-- 安全设置 -->
+                <section class="settings-section">
+                    <h3>安全与隐私</h3>
+
+                    <div class="setting-item">
+                        <label class="switch-label">
+                            <span>禁用文字复制</span>
+                            <label class="switch">
+                                <input type="checkbox" id="copy-protection-enabled" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </label>
+                        <p class="hint">开启后无法选择和复制页面文字（输入框除外）</p>
+                    </div>
+                </section>
+
+                <!-- 数据管理 -->
+                <section class="settings-section">
+                    <h3>数据管理</h3>
+
+                    <div class="setting-item">
+                        <label>配置备份与恢复</label>
+                        <div style="display: flex; gap: 12px;">
+                            <button id="export-config-btn" class="btn btn-secondary">导出配置</button>
+                            <button id="import-config-btn" class="btn btn-secondary">导入配置</button>
+                            <input type="file" id="import-config-input" accept=".json" style="display: none;">
+                        </div>
+                        <p class="hint">导出配置将保存所有设置到 JSON 文件，导入配置可恢复之前的设置</p>
+                    </div>
+                </section>
+
+                <!-- 关于 -->
+                <section class="settings-section">
+                    <h3>关于</h3>
+
+                    <div class="setting-item">
+                        <p><strong>简洁新标签页</strong></p>
+                        <p>版本：v1.2.0</p>
+                        <p>一个简洁优雅的 Chrome 新标签页插件</p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- 底部按钮 -->
+            <div class="settings-modal-footer">
+                <button id="save-settings-btn" class="btn btn-primary btn-large">保存设置</button>
+                <button id="cancel-settings-btn" class="btn btn-secondary btn-large">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 加载模块化 JS -->
+    <script src="js/config.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/modules/time.js"></script>
+    <script src="js/modules/search.js"></script>
+    <script src="js/modules/quote.js"></script>
+    <script src="js/modules/background.js"></script>
+    <script src="js/modules/security.js"></script>
+    <script src="js/modules/settings.js"></script>
+    <script src="js/modules/cursor.js"></script>
+    <script src="js/modules/custom-select.js"></script>
+    <script src="js/modules/quick-access.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

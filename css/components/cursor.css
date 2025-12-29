@@ -1,0 +1,31 @@
+/*
+ * 自定义鼠标样式
+ */
+
+#cursor {
+    position: fixed;
+    width: 16px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+#cursor.active {
+    transform: scale(0.8);
+    background-color: rgba(57, 159, 255, 0.8);
+}
+
+#cursor.hidden {
+    opacity: 0;
+}
+
+/* 隐藏小屏幕上的自定义光标 */
+@media (max-width: 768px) {
+    #cursor {
+        display: none !important;
+    }
+}

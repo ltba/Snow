@@ -1,0 +1,34 @@
+/*
+ * 动画定义
+ */
+
+@keyframes fade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-blur-in {
+    from {
+        filter: blur(20px) brightness(0.3);
+        transform: scale(1.6);
+    }
+    to {
+        filter: blur(0) brightness(1);
+        transform: scale(1);
+    }
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

@@ -1,0 +1,106 @@
+/*
+ * 按钮组件样式
+ */
+
+/* 操作按钮容器 */
+.action-buttons {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    gap: var(--spacing-md);
+    animation: fade 0.5s ease-in-out;
+}
+
+/* 设置按钮 */
+.settings-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-full);
+    background-color: var(--bg-secondary);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-base) ease-in-out;
+}
+
+.settings-btn:hover {
+    background-color: rgba(57, 159, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.settings-btn:focus {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
+}
+
+.settings-btn:active {
+    transform: scale(0.95);
+}
+
+.settings-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* 通用按钮 */
+.btn {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    background-color: var(--bg-secondary);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--text-primary);
+    border: none;
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    transition: all var(--transition-base) ease-in-out;
+}
+
+.btn:hover {
+    background-color: rgba(57, 159, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.btn:focus {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.btn-primary {
+    background-color: rgba(57, 159, 255, 0.3);
+}
+
+.btn-primary:hover {
+    background-color: rgba(57, 159, 255, 0.5);
+}
+
+.btn-secondary {
+    background-color: var(--bg-secondary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--bg-card);
+}
+
+.btn-large {
+    padding: 14px 32px;
+    font-size: var(--font-size-base);
+}

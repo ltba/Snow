@@ -1,0 +1,32 @@
+/*
+ * 新标签页样式 - 主入口文件
+ * 基于 UI.md 设计规范
+ *
+ * 模块化结构：
+ * - variables.css: CSS 变量定义
+ * - base.css: 全局样式和重置
+ * - layout.css: 布局相关
+ * - animations.css: 动画定义
+ * - components/: 组件样式
+ * - responsive.css: 响应式设计
+ */
+
+/* 基础 */
+@import url('./variables.css');
+@import url('./base.css');
+@import url('./layout.css');
+
+/* 组件 */
+@import url('./components/time.css');
+@import url('./components/search.css');
+@import url('./components/quote.css');
+@import url('./components/buttons.css');
+@import url('./components/modal.css');
+@import url('./components/forms.css');
+@import url('./components/cursor.css');
+@import url('./components/custom-select.css');
+@import url('./components/quick-access.css');
+
+/* 动画和响应式 */
+@import url('./animations.css');
+@import url('./responsive.css');

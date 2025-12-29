@@ -1,0 +1,282 @@
+/*
+ * 表单元素样式
+ */
+
+/* 文本输入框 */
+.input-text {
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    background-color: var(--bg-secondary);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid transparent;
+    color: var(--text-primary);
+    font-size: var(--font-size-base);
+    transition: all var(--transition-base) ease-in-out;
+    margin-bottom: 10px;
+    user-select: text;
+    -webkit-user-select: text;
+}
+
+.input-text:focus {
+    outline: none;
+    border-color: rgba(57, 159, 255, 0.5);
+    background-color: var(--bg-card);
+}
+
+.input-text::placeholder {
+    color: var(--text-muted);
+}
+
+.input-text:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* 选择框 */
+.select {
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-3xl) var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    background-color: var(--bg-secondary);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid transparent;
+    color: var(--text-primary);
+    font-size: var(--font-size-base);
+    cursor: pointer;
+    transition: all var(--transition-base) ease-in-out;
+
+    /* 移除默认外观 */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    /* 添加自定义下拉箭头 */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="rgba(255,255,255,0.8)" d="M8 11L3 6h10z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 16px;
+}
+
+.select:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.1);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="rgba(255,255,255,1)" d="M8 11L3 6h10z"/></svg>');
+}
+
+.select:focus {
+    outline: none;
+    border-color: rgba(57, 159, 255, 0.5);
+    background-color: var(--bg-card);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="rgb(57,159,255)" d="M8 11L3 6h10z"/></svg>');
+}
+
+.select option {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* 单选按钮组 */
+.radio-group {
+    display: flex;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+}
+
+.radio-label input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    background-color: transparent;
+    cursor: pointer;
+    margin-right: var(--spacing-sm);
+    transition: all var(--transition-base) ease;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.radio-label input[type="radio"]:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.radio-label input[type="radio"]:checked {
+    border-color: var(--accent-blue);
+    background-color: var(--accent-blue);
+    box-shadow: 0 0 0 2px rgba(57, 159, 255, 0.2);
+}
+
+.radio-label input[type="radio"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.radio-label input[type="radio"]:focus {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
+}
+
+.radio-label span {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    transition: color var(--transition-fast) ease;
+}
+
+.radio-label:hover span {
+    color: var(--text-primary);
+}
+
+/* 复选框组 */
+.checkbox-group {
+    display: flex;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+}
+
+.checkbox-label input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-sm);
+    background-color: transparent;
+    cursor: pointer;
+    margin-right: var(--spacing-sm);
+    transition: all var(--transition-base) ease;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.checkbox-label input[type="checkbox"]:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.checkbox-label input[type="checkbox"]:checked {
+    border-color: var(--accent-blue);
+    background-color: var(--accent-blue);
+    box-shadow: 0 0 0 2px rgba(57, 159, 255, 0.2);
+}
+
+.checkbox-label input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 5px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-label input[type="checkbox"]:focus {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
+}
+
+.checkbox-label span {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    transition: color var(--transition-fast) ease;
+}
+
+.checkbox-label:hover span {
+    color: var(--text-primary);
+}
+
+/* 开关按钮 */
+.switch-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.switch-label > span {
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--bg-secondary);
+    transition: 0.4s;
+    border-radius: 26px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background-color: var(--text-primary);
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--accent-blue);
+}
+
+input:checked + .slider:before {
+    transform: translateX(24px);
+}

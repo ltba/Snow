@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "简洁新标签页",
+  "version": "1.2.0",
+  "description": "一个简洁优雅的新标签页，支持自定义背景、每日一言、搜索功能、URL图片、禁用复制、模块化架构",
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://v1.hitokoto.cn/*"
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_title": "简洁新标签页",
+    "default_popup": "popup.html"
+  }
+}

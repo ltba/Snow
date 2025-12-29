@@ -1,0 +1,84 @@
+/*
+ * 搜索组件样式
+ */
+
+.search-section {
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 60px;
+    animation: slide-in 0.3s ease-out;
+}
+
+.search-form {
+    display: flex;
+    gap: 10px;
+    background-color: var(--bg-secondary);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 50px;
+    padding: var(--spacing-sm);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all var(--transition-base) ease-in-out;
+}
+
+.search-form:focus-within {
+    background-color: var(--bg-card);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: var(--shadow-lg);
+}
+
+.search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: var(--font-size-base);
+    color: var(--text-primary);
+    user-select: text;
+    -webkit-user-select: text;
+}
+
+.search-input::placeholder {
+    color: var(--text-muted);
+}
+
+.search-engine {
+    background-color: var(--bg-secondary);
+    border: none;
+    outline: none;
+    padding: var(--spacing-sm) var(--spacing-3xl) var(--spacing-sm) var(--spacing-lg);
+    border-radius: 50px;
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: all var(--transition-base) ease;
+
+    /* 移除默认外观 */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    /* 添加自定义下拉箭头 */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="rgba(255,255,255,0.8)" d="M6 9L1 4h10z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
+}
+
+.search-engine:hover {
+    background-color: rgba(57, 159, 255, 0.3);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="rgba(255,255,255,1)" d="M6 9L1 4h10z"/></svg>');
+}
+
+.search-engine:focus {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
+    background-color: var(--bg-card);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="rgb(57,159,255)" d="M6 9L1 4h10z"/></svg>');
+}
+
+.search-engine option {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}

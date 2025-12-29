@@ -1,0 +1,57 @@
+/*
+ * CSS 变量定义
+ * 定义全局设计令牌：颜色、间距、圆角、阴影、过渡时间、字体大小
+ */
+
+:root {
+    /* 背景色 */
+    --bg-primary: #333;
+    --bg-secondary: rgba(0, 0, 0, 0.25);
+    --bg-card: rgba(0, 0, 0, 0.4);
+    --bg-overlay: rgba(0, 0, 0, 0.5);
+
+    /* 文字色 */
+    --text-primary: #ffffff;
+    --text-secondary: #efefef;
+    --text-muted: rgba(255, 255, 255, 0.6);
+
+    /* 强调色 */
+    --accent-blue: rgb(57, 159, 255);
+    --accent-orange: rgb(244, 167, 89);
+
+    /* 间距 */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 12px;
+    --spacing-lg: 16px;
+    --spacing-xl: 20px;
+    --spacing-2xl: 24px;
+    --spacing-3xl: 32px;
+
+    /* 圆角 */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-xl: 25px;
+    --radius-full: 50%;
+
+    /* 阴影 */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.2);
+    --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.25);
+
+    /* 过渡时间 */
+    --transition-fast: 0.15s;
+    --transition-base: 0.3s;
+    --transition-slow: 0.5s;
+
+    /* 字体大小 */
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.5rem;
+    --font-size-2xl: 2rem;
+    --font-size-3xl: 3rem;
+}

@@ -1,0 +1,65 @@
+/*
+ * 响应式设计
+ */
+
+@media (max-width: 768px) {
+    .time {
+        font-size: 64px;
+    }
+
+    .date {
+        font-size: 18px;
+    }
+
+    .quote-text {
+        font-size: 18px;
+    }
+
+    .quote-source {
+        font-size: 14px;
+    }
+
+    .search-section {
+        max-width: 90%;
+    }
+
+    .action-buttons {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .settings-modal-content {
+        width: 95%;
+        max-height: 90vh;
+    }
+
+    .settings-modal-header,
+    .settings-modal-body,
+    .settings-modal-footer {
+        padding: var(--spacing-xl);
+    }
+
+    .radio-group,
+    .checkbox-group {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    .settings-modal-footer {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 390px) {
+    .time {
+        font-size: 48px;
+    }
+
+    .date {
+        font-size: 16px;
+    }
+
+    .quote-text {
+        font-size: 16px;
+    }
+}
