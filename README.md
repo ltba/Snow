@@ -57,6 +57,7 @@
 
 ![主界面截图](./screenshot/1.jpg)
 ![设置界面截图](./screenshot/2.jpg)
+![快速添加截图](./screenshot/3.jpg)
 
 
 ---
