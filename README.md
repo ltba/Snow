@@ -74,7 +74,12 @@
 
 ### 安装步骤
 
-#### 方式一：使用 Release 安装（推荐）
+#### edge 浏览器安装
+[edge商店](https://microsoftedge.microsoft.com/addons/detail/flodaiejfnbglbiakknanhhembgloeip)
+
+>Google商店上架要马内，懒得搞了，可以通过开发者模式安装，或者用Chromium.
+
+#### 方式一：使用 Release 安装(其他浏览器推荐)
 
 1. **下载安装包**
    - 访问 [Releases 页面](https://github.com/ltba/Snow/releases)
@@ -93,7 +98,7 @@
    - 打开目标网站
    - 点击扩展图标即可快速添加
 
-#### 方式二：开发者模式安装
+#### 方式二：开发者模式安装（Chrome 浏览器推荐）
 
 1. **下载项目**
    ```bash
